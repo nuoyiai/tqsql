@@ -5,7 +5,7 @@
 
 #### 代码生成器
 仓库 tpsql-build
-仓库码云地址 https://gitee.com/nuoyiai/tpsql-build.git
+仓库码云地址 https://github.com/nuoyiai/tpsql-build.git
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0527/175542_57c7356a_1827830.png "NDXB)@9TU4KBEK@E8R0_0MN.png")
 
 
@@ -17,7 +17,7 @@
 
 #### 使用说明
 
-1.  参看wiki文档 https://gitee.com/nuoyiai/tpsql/wikis
+1.  参看wiki文档 https://github.com/nuoyiai/tqsql/wiki
 
 #### 参与贡献
 
