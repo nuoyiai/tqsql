@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tpsql>
+
+    <sql id="mysql_drop_table_crm_customer" >
+        DROP TABLE IF EXISTS CRM_CUSTOMER
+    </sql>
+
+    <sql id="mysql_drop_table_pms_user" >
+        DROP TABLE IF EXISTS PMS_USER
+    </sql>
+
+    <sql id="mysql_drop_table_pms_user_roles" >
+        DROP TABLE IF EXISTS PMS_USER_ROLES
+    </sql>
+
+    <sql id="mysql_drop_table_pms_role" >
+        DROP TABLE IF EXISTS PMS_ROLE
+    </sql>
+
+    <sql id="mysql_drop_table_test_a" >
+        DROP TABLE IF EXISTS TEST_A
+    </sql>
+
+    <sql id="mysql_create_table_crm_customer" >
+        CREATE TABLE CRM_CUSTOMER
+        (
+            CUST_ID INT NOT NULL COMMENT '客户ID',
+            CUSTOMER_NAME VARCHAR(120) COMMENT '客户名称',
+            CONTACTER_NAME VARCHAR(30) COMMENT '联系人',
+            CONTACTER_PHONE VARCHAR(60) COMMENT '联系电话',
+            WEIXIN VARCHAR(30) COMMENT '微信',
+            QQ VARCHAR(60) COMMENT 'QQ',
+            CUSTOMER_ADDRESS VARCHAR(150) COMMENT '地区',
+            WANGWANG VARCHAR(120) COMMENT '旺旺',
+            CUSTOMER_AREA VARCHAR(150) COMMENT '地区',
+            BIRTHDAY TIMESTAMP NULL COMMENT '生日',
+            PRIMARY KEY (CUST_ID)
+        ) COMMENT='客户'
+    </sql>
+
+    <sql id="mysql_create_table_pms_user" >
+        CREATE TABLE PMS_USER
+        (
+            USER_ID INT NOT NULL COMMENT '用户ID',
+            USER_NAME VARCHAR(60) NOT NULL COMMENT '姓名',
+            USER_ACCOUNT VARCHAR(60) NOT NULL COMMENT '帐号',
+            USER_PASSWORD VARCHAR(60) NOT NULL COMMENT '密码',
+            USER_EMAIL VARCHAR(120) COMMENT '邮箱 ',
+            USER_PHONE VARCHAR(30) COMMENT '手机号码',
+            DEPT_ID INT COMMENT '机构ID',
+            LOGIN_IP VARCHAR(30) COMMENT '上次登录IP',
+            IS_BIND_EMAIL bit COMMENT '是否绑定邮箱 (1 已绑定 0 未绑定)',
+            IS_BIND_PHONE bit COMMENT '是否绑定手机 (1 已绑定 0 未绑定)',
+            IS_DEL bit COMMENT '删除标记 (1 删除 0 未删除)',
+            IS_DISABLE bit COMMENT '是否禁用 (1 禁用 0 未禁用)',
+            PRIMARY KEY (USER_ID)
+        ) COMMENT='用户'
+    </sql>
+
+    <sql id="mysql_create_table_pms_user_roles" >
+        CREATE TABLE PMS_USER_ROLES
+        (
+            PUR_ID INT NOT NULL COMMENT '主键ID',
+            PUR_USER_ID INT NOT NULL COMMENT '用户ID',
+            PUR_ROLE_ID INT NOT NULL COMMENT '角色ID',
+            PUR_CREATE_DATE TIMESTAMP NULL COMMENT '创建时间',
+            PUR_UPDATE_DATE TIMESTAMP NULL COMMENT '修改时间',
+            PUR_CREATE_USER INT COMMENT '创建用户',
+            PUR_UPDATE_USER INT COMMENT '修改用户',
+            PRIMARY KEY (PUR_ID)
+        ) COMMENT='用户角色表'
+    </sql>
+
+    <sql id="mysql_create_table_pms_role" >
+        CREATE TABLE PMS_ROLE
+        (
+            ROLE_ID INT NOT NULL COMMENT '角色ID',
+            ROLE_TYPE INT COMMENT '角色类型',
+            ROLE_NAME VARCHAR(60) COMMENT '角色名称',
+            ROLE_SORT_NO INT COMMENT '排序号',
+            ROLE_IS_DEFAULT bit COMMENT '是否默认角色 1:是 0:否',
+            ROLE_REMARK VARCHAR(300) COMMENT '备注',
+            ROLE_CREATE_DATE TIMESTAMP NULL COMMENT '创建时间',
+            ROLE_UPDATE_DATE TIMESTAMP NULL COMMENT '更新时间',
+            ROLE_CREATE_USER INT COMMENT '创建用户',
+            ROLE_UPDATE_USER INT COMMENT '更新用户',
+            ROLE_IS_FIXED bit COMMENT '是否固定角色 1:是 0:否',
+            PRIMARY KEY (ROLE_ID)
+        ) COMMENT='角色'
+    </sql>
+
+    <sql id="mysql_create_table_test_a" >
+        CREATE TABLE TEST_A
+        (
+            ID INT NOT NULL AUTO_INCREMENT COMMENT 'ID',
+            NAME VARCHAR(60) COMMENT '名称',
+            BIRTHDAY TIMESTAMP NULL COMMENT '生日',
+            AMOUNT DECIMAL(18,2) COMMENT '金额',
+            REMARK text COMMENT '备注',
+            PRIMARY KEY (ID)
+        ) COMMENT='测试'
+    </sql>
+
+</tpsql>

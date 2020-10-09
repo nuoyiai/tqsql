@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mapping>
+	<class name="tpsql.test.domain.PmsUserRoles" table="PMS_USER_ROLES" >
+		<id name="purId" type="java.lang.Integer" >
+			<column name="PUR_ID" length="10" />
+		</id>
+		<property name="purUserId" type="java.lang.Integer" >
+			<column name="PUR_USER_ID" length="10" />
+		</property>
+		<property name="purRoleId" type="java.lang.Integer" >
+			<column name="PUR_ROLE_ID" length="10" />
+		</property>
+		<property name="purCreateDate" type="java.util.Date" >
+			<column name="PUR_CREATE_DATE" />
+		</property>
+		<property name="purUpdateDate" type="java.util.Date" >
+			<column name="PUR_UPDATE_DATE" />
+		</property>
+		<property name="purCreateUser" type="java.lang.Integer" >
+			<column name="PUR_CREATE_USER" length="10" />
+		</property>
+		<property name="purUpdateUser" type="java.lang.Integer" >
+			<column name="PUR_UPDATE_USER" length="10" />
+		</property>
+	</class>
+</mapping>

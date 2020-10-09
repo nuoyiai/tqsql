@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tpsql>
+
+	<!-- 新增用户角色表 -->
+	<sql id="insertPmsUserRoles" >
+		INSERT INTO PMS_USER_ROLES (PUR_ID,PUR_USER_ID,PUR_ROLE_ID,PUR_CREATE_DATE,PUR_UPDATE_DATE,PUR_CREATE_USER,PUR_UPDATE_USER) VALUES ([#purId]
+		<clause prepend="," nvl="0" >[#purUserId]</clause>
+		<clause prepend="," nvl="0" >[#purRoleId]</clause>
+		<clause prepend="," nvl="NULL" >[#purCreateDate]</clause>
+		<clause prepend="," nvl="NULL" >[#purUpdateDate]</clause>
+		<clause prepend="," nvl="0" >[#purCreateUser]</clause>
+		<clause prepend="," nvl="0" >[#purUpdateUser]</clause>
+		)
+	</sql>
+
+	<!-- 修改用户角色表 -->
+	<sql id="updatePmsUserRoles" >
+		UPDATE PMS_USER_ROLES 
+		<set>
+			<clause prepend="," assert="!isNull([purUserId])" >PUR_USER_ID = [#purUserId]</clause>
+			<clause prepend="," assert="!isNull([purRoleId])" >PUR_ROLE_ID = [#purRoleId]</clause>
+			<clause prepend="," assert="!isNull([purCreateDate])" >PUR_CREATE_DATE = [#purCreateDate]</clause>
+			<clause prepend="," assert="!isNull([purUpdateDate])" >PUR_UPDATE_DATE = [#purUpdateDate]</clause>
+			<clause prepend="," assert="!isNull([purCreateUser])" >PUR_CREATE_USER = [#purCreateUser]</clause>
+			<clause prepend="," assert="!isNull([purUpdateUser])" >PUR_UPDATE_USER = [#purUpdateUser]</clause>
+		</set>
+		<where>
+			 PUR_ID = [#purId] 
+		</where>
+	</sql>
+
+	<!-- 通过主键得到用户角色表 -->
+	<sql id="getPmsUserRolesById" >
+		SELECT * FROM PMS_USER_ROLES WHERE PUR_ID = [0]
+	</sql>
+
+	<!-- 通过主键删除用户角色表 -->
+	<sql id="deletePmsUserRolesById" >
+		DELETE FROM PMS_USER_ROLES WHERE PUR_ID = [0]
+	</sql>
+
+	<!-- 删除所有用户角色表 -->
+	<sql id="deleteAllPmsUserRoles" >
+		DELETE FROM PMS_USER_ROLES
+	</sql>
+
+	<!-- 查询用户角色表 -->
+	<sql id="queryPmsUserRolesList" >
+		SELECT * FROM PMS_USER_ROLES 
+		<where>
+			<clause prepend="and" assert="!isNull([purUserId])" > PUR_USER_ID = [purUserId] </clause>
+			<clause prepend="and" assert="!isNull([purRoleId])" > PUR_ROLE_ID = [purRoleId] </clause>
+			<clause parent="DateSpan" params="PUR_CREATE_DATE,purCreateDate,purCreateDateEnd" ></clause>
+			<clause parent="DateSpan" params="PUR_UPDATE_DATE,purUpdateDate,purUpdateDateEnd" ></clause>
+			<clause prepend="and" assert="!isNull([purCreateUser])" > PUR_CREATE_USER = [purCreateUser] </clause>
+			<clause prepend="and" assert="!isNull([purUpdateUser])" > PUR_UPDATE_USER = [purUpdateUser] </clause>
+		</where>
+	</sql>
+
+	<!-- 获取用户的角色信息，做外部链接聚合用 -->
+	<sql id="getUserRoles">
+		select r.ROLE_ID,r.ROLE_NAME,r.ROLE_CREATE_DATE,ur.PUR_USER_ID from PMS_USER_ROLES ur inner join  PMS_ROLE r on r.ROLE_ID = ur.PUR_ROLE_ID
+		<where>
+			<clause prepend="and"> ur.PUR_USER_ID in (<for in="[0]" split="," >{item}</for>)</clause>
+		</where>
+	</sql>
+
+</tpsql>

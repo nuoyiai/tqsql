@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tpsql>
+
+	<class id="PmsUser" name="tpsql.test.domain.PmsUser" ></class>
+
+	<cache id="TestUserRedisCache" type="Redis" >
+		<flushInterval hours="24" />	<!-- days hours minutes seconds -->
+		<flushOnExecute statement="insertPmsUser" />
+		<flushOnExecute statement="updatePmsUser" />
+	</cache>
+
+	<cache id="TestUserOsCache" type="OSCache" >
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertPmsUser" />
+		<flushOnExecute statement="updatePmsUser" />
+	</cache>
+
+	<!-- 新增用户 -->
+	<sql id="insertPmsUser" >
+		INSERT INTO PMS_USER (USER_ID,USER_NAME,USER_ACCOUNT,USER_PASSWORD,USER_EMAIL,USER_PHONE,DEPT_ID,LOGIN_IP,IS_BIND_EMAIL,IS_BIND_PHONE,IS_DEL,IS_DISABLE) VALUES ([#userId]
+		<clause prepend="," nvl="''" >[#userName]</clause>
+		<clause prepend="," nvl="''" >[#userAccount]</clause>
+		<clause prepend="," nvl="''" >[#userPassword]</clause>
+		<clause prepend="," nvl="''" >[#userEmail]</clause>
+		<clause prepend="," nvl="''" >[#userPhone]</clause>
+		<clause prepend="," nvl="0" >[#deptId]</clause>
+		<clause prepend="," nvl="''" >[#loginIp]</clause>
+		<clause prepend="," nvl="NULL" >[#isBindEmail]</clause>
+		<clause prepend="," nvl="NULL" >[#isBindPhone]</clause>
+		<clause prepend="," nvl="NULL" >[#isDel]</clause>
+		<clause prepend="," nvl="NULL" >[#isDisable]</clause>
+		)
+	</sql>
+
+	<!-- 修改用户 -->
+	<sql id="updatePmsUser" >
+		UPDATE PMS_USER 
+		<set>
+			<clause prepend="," assert="!isNull([userName])" >USER_NAME = [#userName]</clause>
+			<clause prepend="," assert="!isNull([userAccount])" >USER_ACCOUNT = [#userAccount]</clause>
+			<clause prepend="," assert="!isNull([userPassword])" >USER_PASSWORD = [#userPassword]</clause>
+			<clause prepend="," assert="!isNull([userEmail])" >USER_EMAIL = [#userEmail]</clause>
+			<clause prepend="," assert="!isNull([userPhone])" >USER_PHONE = [#userPhone]</clause>
+			<clause prepend="," assert="!isNull([deptId])" >DEPT_ID = [#deptId]</clause>
+			<clause prepend="," assert="!isNull([loginIp])" >LOGIN_IP = [#loginIp]</clause>
+			<clause prepend="," assert="!isNull([isBindEmail])" >IS_BIND_EMAIL = [#isBindEmail]</clause>
+			<clause prepend="," assert="!isNull([isBindPhone])" >IS_BIND_PHONE = [#isBindPhone]</clause>
+			<clause prepend="," assert="!isNull([isDel])" >IS_DEL = [#isDel]</clause>
+			<clause prepend="," assert="!isNull([isDisable])" >IS_DISABLE = [#isDisable]</clause>
+		</set>
+		<where>
+			 USER_ID = [#userId] 
+		</where>
+	</sql>
+
+	<!-- 通过主键得到用户 -->
+	<sql id="getPmsUserById" >
+		SELECT * FROM PMS_USER WHERE USER_ID = [0]
+	</sql>
+
+	<!-- 通过主键删除用户 -->
+	<sql id="deletePmsUserById" >
+		UPDATE PMS_USER SET IS_DEL = 1 WHERE USER_ID = [0]
+	</sql>
+
+	<!-- 删除所有用户 -->
+	<sql id="deleteAllPmsUser" >
+		DELETE FROM PMS_USER
+	</sql>
+
+	<!-- 查询用户 -->
+	<sql id="queryPmsUserList" result="PmsUser" >
+		SELECT * FROM PMS_USER 
+		<where>
+			<clause prepend="and" assert="!isNullOrEmpty([userName])" > USER_NAME = '[userName]' </clause>
+			<clause prepend="and" assert="!isNullOrEmpty([userAccount])" > USER_ACCOUNT = '[userAccount]' </clause>
+			<clause prepend="and" assert="!isNullOrEmpty([userPassword])" > USER_PASSWORD = '[userPassword]' </clause>
+			<clause prepend="and" assert="!isNullOrEmpty([userEmail])" > USER_EMAIL = '[userEmail]' </clause>
+			<clause prepend="and" assert="!isNullOrEmpty([userPhone])" > USER_PHONE = '[userPhone]' </clause>
+			<clause prepend="and" assert="!isNull([deptId])" > DEPT_ID = [deptId] </clause>
+			<clause prepend="and" assert="!isNullOrEmpty([loginIp])" > LOGIN_IP = '[loginIp]' </clause>
+		</where>
+	</sql>
+
+	<class id="PmsUserQuery" name="tpsql.test.query.PmsUserQuery">
+		<property name="roleIds" column="ROLE_IDS" />
+		<property name="roleNames" column="ROLE_NAMES"/>
+		<property name="roleList" column="USER_ROLES" />
+		<property name="role" column="USER_ROLES" />
+	</class>
+
+	<sql id="testQueryPmsUser" result="PmsUserQuery" >
+		SELECT * FROM PMS_USER
+		<where>
+			<clause prepend="and" assert="!isNullOrEmpty([userName])" > USER_NAME = '[userName]' </clause>
+		</where>
+		<poly sqlId="getUserRoles" pkey="USER_ID" fkey="PUR_USER_ID" >
+			<column name="ROLE_ID" alias="ROLE_IDS" op="join" split="," />
+			<column name="ROLE_NAME" alias="ROLE_NAMES" op="join" split=" " />
+		</poly>
+		<link sqlId="getUserRoles" pkey="USER_ID" fkey="PUR_USER_ID" column="USER_ROLES" />
+	</sql>
+
+	<sql id="testQueryPmsUserByCache" result="PmsUserQuery" cache="TestUserOsCache" >
+		SELECT * FROM PMS_USER
+		<where>
+			<clause prepend="and" assert="!isNullOrEmpty([userName])" > USER_NAME = '[userName]' </clause>
+		</where>
+		<poly sqlId="getUserRoles" pkey="USER_ID" fkey="PUR_USER_ID" >
+			<column name="ROLE_ID" alias="ROLE_IDS" op="join" split="," />
+			<column name="ROLE_NAME" alias="ROLE_NAMES" op="join" split=" " />
+		</poly>
+		<link sqlId="getUserRoles" pkey="USER_ID" fkey="PUR_USER_ID" column="USER_ROLES" />
+	</sql>
+
+</tpsql>

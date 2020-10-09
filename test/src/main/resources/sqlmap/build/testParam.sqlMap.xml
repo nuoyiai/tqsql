@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tpsql>
+
+	<sql id="testParam1" >
+		select
+		[param1] v1,
+		[param2.0] v2,
+		[param2.1] v3,
+		[param3.0] v4,
+		[param3.1] v5,
+		[param4.key1] v6,
+		[param4.key2] v7,
+		[param5.0.param1] v8,
+		[param6.param4.key1] v9
+		from dual
+	</sql>
+
+	<sql id="testParam2" >
+		select
+		[#param1] v1,
+		[#param2.0] v2,
+		[#param2.1] v3,
+		[#param3.0] v4,
+		[#param3.1] v5,
+		[#param4.key1] v6,
+		[#param4.key2] v7,
+		[#param5.0.param1] v8,
+		[#param6.param4.key1] v9
+		from dual
+	</sql>
+
+	<sql id="testParam3" >
+		select
+		[0][param1] v1,
+		[0][param2.0] v2,
+		[0][param2.1] v3,
+		[0][param3.0] v4,
+		[0][param3.1] v5,
+		[0][param4.key1] v6,
+		[0][param4.key2] v7,
+		[0][param5.0.param1] v8,
+		[0][param6.param4.key1] v9
+		from dual
+		union all
+		select
+		[1][$param1] v1,
+		[1][#param2.0] v2,
+		[1][$param2.1] v3,
+		[1][#param3.0] v4,
+		[1][$param3.1] v5,
+		[1][#param4.key1] v6,
+		[1][$param4.key2] v7,
+		[1][#param5.0.param1] v8,
+		[1][$param6.param4.key1] v9
+		from dual
+	</sql>
+
+</tpsql>

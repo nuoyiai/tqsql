@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mapping>
+	<class name="tpsql.test.domain.PmsUser" table="PMS_USER" >
+		<id name="userId" type="java.lang.Integer" >
+			<column name="USER_ID" length="10" />
+		</id>
+		<property name="userName" type="java.lang.String" >
+			<column name="USER_NAME" length="60" />
+		</property>
+		<property name="userAccount" type="java.lang.String" >
+			<column name="USER_ACCOUNT" length="60" />
+		</property>
+		<property name="userPassword" type="java.lang.String" >
+			<column name="USER_PASSWORD" length="60" />
+		</property>
+		<property name="userEmail" type="java.lang.String" >
+			<column name="USER_EMAIL" length="120" />
+		</property>
+		<property name="userPhone" type="java.lang.String" >
+			<column name="USER_PHONE" length="30" />
+		</property>
+		<property name="deptId" type="java.lang.Integer" >
+			<column name="DEPT_ID" length="10" />
+		</property>
+		<property name="loginIp" type="java.lang.String" >
+			<column name="LOGIN_IP" length="30" />
+		</property>
+		<property name="isBindEmail" type="java.lang.Boolean" >
+			<column name="IS_BIND_EMAIL" length="1" />
+		</property>
+		<property name="isBindPhone" type="java.lang.Boolean" >
+			<column name="IS_BIND_PHONE" length="1" />
+		</property>
+		<property name="isDel" type="java.lang.Boolean" >
+			<column name="IS_DEL" length="1" />
+		</property>
+		<property name="isDisable" type="java.lang.Boolean" >
+			<column name="IS_DISABLE" length="1" />
+		</property>
+	</class>
+</mapping>

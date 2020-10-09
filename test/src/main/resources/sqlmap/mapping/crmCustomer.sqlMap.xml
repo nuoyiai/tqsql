@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mapping>
+	<class name="tpsql.test.domain.CrmCustomer" table="CRM_CUSTOMER" >
+		<id name="custId" type="java.lang.Integer" >
+			<column name="CUST_ID" length="10" />
+		</id>
+		<property name="customerName" type="java.lang.String" >
+			<column name="CUSTOMER_NAME" length="120" />
+		</property>
+		<property name="contacterName" type="java.lang.String" >
+			<column name="CONTACTER_NAME" length="30" />
+		</property>
+		<property name="contacterPhone" type="java.lang.String" >
+			<column name="CONTACTER_PHONE" length="60" />
+		</property>
+		<property name="weixin" type="java.lang.String" >
+			<column name="WEIXIN" length="30" />
+		</property>
+		<property name="qq" type="java.lang.String" >
+			<column name="QQ" length="60" />
+		</property>
+		<property name="customerAddress" type="java.lang.String" >
+			<column name="CUSTOMER_ADDRESS" length="150" />
+		</property>
+		<property name="wangwang" type="java.lang.String" >
+			<column name="WANGWANG" length="120" />
+		</property>
+		<property name="customerArea" type="java.lang.String" >
+			<column name="CUSTOMER_AREA" length="150" />
+		</property>
+		<property name="birthday" type="java.util.Date" >
+			<column name="BIRTHDAY" />
+		</property>
+	</class>
+</mapping>

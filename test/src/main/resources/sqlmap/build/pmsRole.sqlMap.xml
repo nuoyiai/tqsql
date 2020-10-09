@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tpsql>
+
+	<!-- 新增角色 -->
+	<sql id="insertPmsRole" >
+		INSERT INTO PMS_ROLE (ROLE_ID,ROLE_TYPE,ROLE_NAME,ROLE_SORT_NO,ROLE_IS_DEFAULT,ROLE_REMARK,ROLE_CREATE_DATE,ROLE_UPDATE_DATE,ROLE_CREATE_USER,ROLE_UPDATE_USER,ROLE_IS_FIXED) VALUES ([#roleId]
+		<clause prepend="," nvl="0" >[#roleType]</clause>
+		<clause prepend="," nvl="''" >[#roleName]</clause>
+		<clause prepend="," nvl="0" >[#roleSortNo]</clause>
+		<clause prepend="," nvl="NULL" >[#roleIsDefault]</clause>
+		<clause prepend="," nvl="''" >[#roleRemark]</clause>
+		<clause prepend="," nvl="NULL" >[#roleCreateDate]</clause>
+		<clause prepend="," nvl="NULL" >[#roleUpdateDate]</clause>
+		<clause prepend="," nvl="0" >[#roleCreateUser]</clause>
+		<clause prepend="," nvl="0" >[#roleUpdateUser]</clause>
+		<clause prepend="," nvl="NULL" >[#roleIsFixed]</clause>
+		)
+	</sql>
+
+	<!-- 修改角色 -->
+	<sql id="updatePmsRole" >
+		UPDATE PMS_ROLE 
+		<set>
+			<clause prepend="," assert="!isNull([roleType])" >ROLE_TYPE = [#roleType]</clause>
+			<clause prepend="," assert="!isNull([roleName])" >ROLE_NAME = [#roleName]</clause>
+			<clause prepend="," assert="!isNull([roleSortNo])" >ROLE_SORT_NO = [#roleSortNo]</clause>
+			<clause prepend="," assert="!isNull([roleIsDefault])" >ROLE_IS_DEFAULT = [#roleIsDefault]</clause>
+			<clause prepend="," assert="!isNull([roleRemark])" >ROLE_REMARK = [#roleRemark]</clause>
+			<clause prepend="," assert="!isNull([roleCreateDate])" >ROLE_CREATE_DATE = [#roleCreateDate]</clause>
+			<clause prepend="," assert="!isNull([roleUpdateDate])" >ROLE_UPDATE_DATE = [#roleUpdateDate]</clause>
+			<clause prepend="," assert="!isNull([roleCreateUser])" >ROLE_CREATE_USER = [#roleCreateUser]</clause>
+			<clause prepend="," assert="!isNull([roleUpdateUser])" >ROLE_UPDATE_USER = [#roleUpdateUser]</clause>
+			<clause prepend="," assert="!isNull([roleIsFixed])" >ROLE_IS_FIXED = [#roleIsFixed]</clause>
+		</set>
+		<where>
+			 ROLE_ID = [#roleId] 
+		</where>
+	</sql>
+
+	<!-- 通过主键得到角色 -->
+	<sql id="getPmsRoleById" >
+		SELECT * FROM PMS_ROLE WHERE ROLE_ID = [0]
+	</sql>
+
+	<!-- 通过主键删除角色 -->
+	<sql id="deletePmsRoleById" >
+		DELETE FROM PMS_ROLE WHERE ROLE_ID = [0]
+	</sql>
+
+	<!-- 删除所有角色 -->
+	<sql id="deleteAllPmsRole" >
+		DELETE FROM PMS_ROLE
+	</sql>
+
+	<!-- 查询角色 -->
+	<sql id="queryPmsRoleList" >
+		SELECT * FROM PMS_ROLE 
+		<where>
+			<clause prepend="and" assert="!isNull([roleType])" > ROLE_TYPE = [roleType] </clause>
+			<clause prepend="and" assert="!isNullOrEmpty([roleName])" > ROLE_NAME = '[roleName]' </clause>
+			<clause prepend="and" assert="!isNull([roleSortNo])" > ROLE_SORT_NO = [roleSortNo] </clause>
+			<clause prepend="and" assert="!isNullOrEmpty([roleRemark])" > ROLE_REMARK = '[roleRemark]' </clause>
+			<clause parent="DateSpan" params="ROLE_CREATE_DATE,roleCreateDate,roleCreateDateEnd" ></clause>
+			<clause parent="DateSpan" params="ROLE_UPDATE_DATE,roleUpdateDate,roleUpdateDateEnd" ></clause>
+			<clause prepend="and" assert="!isNull([roleCreateUser])" > ROLE_CREATE_USER = [roleCreateUser] </clause>
+			<clause prepend="and" assert="!isNull([roleUpdateUser])" > ROLE_UPDATE_USER = [roleUpdateUser] </clause>
+		</where>
+	</sql>
+
+</tpsql>

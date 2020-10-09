@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<bean id="ObjectReader" class="tpsql.reader.DefaultObjectReader" >
+	</bean>
+
+	<bean id="ObjectWriter" class="tpsql.writer.DefaultObjectWriter" >
+	</bean>
+	
+	<bean id="CollectionReader" class="tpsql.reader.DefaultCollectionReader" >
+	</bean>
+	
+	<bean id="SpringContextAware" class="tpsql.spring.SpringContext" >
+	</bean>
+
+	<bean id="DataConvert" class="tpsql.convert.DataConvert" >
+	</bean>
+</beans>

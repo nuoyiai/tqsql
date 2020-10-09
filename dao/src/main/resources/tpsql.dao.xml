@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<import resource="classpath:tpsql.sql.xml"/>
+    
+    <bean id="ObjectReader" class="tpsql.entity.EntityReader" />
+    
+    <bean id="IdGenerator" class="tpsql.dao.DefaultIdGenerator" />
+    
+    <bean id="DbMetaStore" class="tpsql.metadata.DbMetaStore" />
+    
+    <bean id="AbstractEntityMap" class="tpsql.entity.EntityMap" abstract="true" />
+    
+</beans>
