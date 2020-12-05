@@ -40,7 +40,7 @@
 	<dependencies>
 		<dependency>
 		  <groupId>${project.parent.groupId}</groupId>
-		  <artifactId>tpsql-dao</artifactId>
+		  <artifactId>tpsql-core</artifactId>
 		  <version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>

@@ -1,7 +1,7 @@
 package tpsql.test.util;
 
-import tpsql.reflector.PropertyInfo;
-import tpsql.util.ReflectorUtil;
+import tpsql.core.reflector.PropertyInfo;
+import tpsql.core.util.ReflectorUtil;
 
 public class PrintUtil {
 

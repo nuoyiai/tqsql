@@ -2,10 +2,10 @@ package tpsql.test.junit.mysql;
 
 import org.junit.Test;
 import tpsql.dao.IObjectDao;
-import tpsql.dao.ObjectDao;
-import tpsql.pagesize.IPageList;
-import tpsql.pagesize.IPageSize;
-import tpsql.pagesize.PageSize;
+import tpsql.dao.support.ObjectDao;
+import tpsql.dao.pagesize.IPageList;
+import tpsql.dao.pagesize.IPageSize;
+import tpsql.dao.pagesize.PageSize;
 import tpsql.test.domain.PmsUser;
 
 import java.util.HashMap;

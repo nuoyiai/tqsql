@@ -1,8 +1,8 @@
 package tpsql.test.junit.mysql;
 
 import org.junit.Test;
-import tpsql.collection.DataTable;
-import tpsql.dao.DataDao;
+import tpsql.core.collection.DataTable;
+import tpsql.dao.support.DataDao;
 import tpsql.dao.IDataDao;
 import tpsql.test.domain.test.TestEntry3;
 

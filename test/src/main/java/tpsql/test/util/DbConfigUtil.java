@@ -7,7 +7,7 @@ import java.util.Map;
 public class DbConfigUtil {
 
     public static DriverDbConfig getDbConfig(String dbType){
-        Map map = PropertiesUtil.loadPropertyMapByResource("/dbconfig/"+dbType+".properties");
+        Map map = PropertiesUtil.loadPropertyMapByResource("/cfg/dbconfig/" +dbType+".properties");
         String url = (String)map.get("jdbc.url");
         String driverClassName = (String)map.get("jdbc.driverClassName");
         String username = (String)map.get("jdbc.username");

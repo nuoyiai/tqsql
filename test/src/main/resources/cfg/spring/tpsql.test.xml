@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- 默认的数据库置配，当连接多个数据库时，代码中必须指定使用那个数据库连接配置
+	<bean id="DbConfig" class="tpsql.sql.config.DbConfig" >
+		<property name="dbType" value="MySql"/>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="dialects">
+			<map>
+				/**
+					本框架支持多种数据库，不同数据库存在方言，这里指定不同的方言实现类
+					目录方言函数功能，主要有分页查询，日期时间函数，数据库元数据访问
+				 */
+				<entry key="Oracle" value="banger.sql.dialect.OracleDialect" />
+				<entry key="Sqlite" value="banger.sql.dialect.SqliteDialect" />
+				<entry key="MySql" value="banger.sql.dialect.MySqlDialect" />
+			</map>
+		</property>
+
+	</bean>
+	-->
+
+	<bean id="allSqlMap" class="tpsql.sql.mapping.SqlContext" >
+		<property name="resources">
+			<set>
+				<!-- 系统框架自带的常用SQL节点 -->
+				<value>classpath*:/tpsql.sqlMap.xml</value>
+				<!--
+					gen目录存放代码生成器生成的sqlMap.xml文件
+					代码生成器 git地址:https://gitee.com/nuoyiai/tpsql-build.git
+				 -->
+				<value>classpath*:/sql/*.sqlMap.xml</value>
+				<value>classpath*:/sql/build/*.sqlMap.xml</value>
+			</set>
+		</property>
+	</bean>
+
+	<bean id="SqlMap" class="tpsql.sql.mapping.SqlMap" >
+		<property name="contexts" >
+			<set merge="true">
+				<ref bean="allSqlMap"></ref>
+			</set>
+		</property>
+	</bean>
+
+	<bean id="EntityMap" class="tpsql.dao.entity.EntityMap" >
+		<property name="mappingLocations">
+			<list>
+				<!--
+					代码生成器生成的实体对像映射文件，用于对像和表映射关系（包括主键ID）
+				 -->
+
+				<value>classpath*:/sql/mapping/*.sqlMap.xml</value>
+			</list>
+		</property>
+	</bean>
+
+ </beans>

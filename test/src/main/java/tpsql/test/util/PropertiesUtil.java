@@ -1,6 +1,6 @@
 package tpsql.test.util;
 
-import tpsql.util.FileUtil;
+import tpsql.core.util.FileUtil;
 
 import java.io.File;
 import java.io.FileInputStream;

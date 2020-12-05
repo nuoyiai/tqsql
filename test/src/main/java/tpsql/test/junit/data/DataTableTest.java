@@ -1,13 +1,10 @@
 package tpsql.test.junit.data;
 
 import org.junit.Test;
-import tpsql.collection.DataRow;
-import tpsql.collection.DataTable;
-import tpsql.convert.DataTableConvert;
-import tpsql.convert.IDataConvert;
-
-import java.math.BigDecimal;
-import java.util.Date;
+import tpsql.core.collection.DataRow;
+import tpsql.core.collection.DataTable;
+import tpsql.core.convert.DataTableConvert;
+import tpsql.core.convert.IDataConvert;
 
 public class DataTableTest {
 

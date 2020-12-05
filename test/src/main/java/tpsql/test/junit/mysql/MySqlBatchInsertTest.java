@@ -2,7 +2,7 @@ package tpsql.test.junit.mysql;
 
 import org.junit.Test;
 import tpsql.dao.IObjectDao;
-import tpsql.dao.ObjectDao;
+import tpsql.dao.support.ObjectDao;
 import tpsql.test.domain.CrmCustomer;
 import tpsql.test.domain.PmsUser;
 

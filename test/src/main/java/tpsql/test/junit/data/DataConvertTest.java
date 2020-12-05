@@ -1,12 +1,12 @@
 package tpsql.test.junit.data;
 
 import org.junit.Test;
-import tpsql.collection.DataTable;
-import tpsql.convert.*;
+import tpsql.core.collection.DataTable;
+import tpsql.core.convert.*;
 import tpsql.test.domain.test.TestEntry1;
 import tpsql.test.domain.test.TestEntry2;
 import tpsql.test.util.PrintUtil;
-import tpsql.util.ByteUtil;
+import tpsql.core.util.ByteUtil;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

@@ -1,12 +1,12 @@
 package tpsql.test.junit.mysql;
 
 import org.junit.Test;
-import tpsql.collection.DataRow;
-import tpsql.collection.DataTable;
-import tpsql.dao.DataDao;
+import tpsql.core.collection.DataRow;
+import tpsql.core.collection.DataTable;
+import tpsql.dao.support.DataDao;
 import tpsql.dao.IDataDao;
 import tpsql.dao.IObjectDao;
-import tpsql.dao.ObjectDao;
+import tpsql.dao.support.ObjectDao;
 import tpsql.sql.util.ISqlEngine;
 import tpsql.sql.util.SqlEngine;
 import tpsql.test.domain.PmsRole;
@@ -88,7 +88,7 @@ public class InitMySqlTestDbTest extends MySqlSupport {
         dao.executes("insertPmsUserRoles",userRoleList);
 
         Map<String,Object> condition = new HashMap();
-        List<PmsUserQuery> list = (List<PmsUserQuery>)dao.queryList("testQueryPmsUser",condition);
+        List<PmsUserQuery> list = dao.queryList("testQueryPmsUser",condition);
         for(PmsUserQuery pmsUserQuery : list){
             System.out.println("{userName:\""+pmsUserQuery.getUserName()+"\",roleIds:\""+pmsUserQuery.getRoleIds()+"\",roldNames:\""+pmsUserQuery.getRoleNames()+"\"}");
         }
@@ -107,7 +107,7 @@ public class InitMySqlTestDbTest extends MySqlSupport {
     public void testLinkQuery(){
         IObjectDao dao = new ObjectDao();
         Map<String,Object> condition = new HashMap();
-        List<PmsUserQuery> list = (List<PmsUserQuery>)dao.queryList("testQueryPmsUser",condition);
+        List<PmsUserQuery> list = dao.queryList("testQueryPmsUser",condition);
         for(PmsUserQuery pmsUserQuery : list){
             System.out.println("{userName:\""+pmsUserQuery.getUserName()+"\"}");
             for(PmsRole role : pmsUserQuery.getRoleList()){
@@ -120,7 +120,7 @@ public class InitMySqlTestDbTest extends MySqlSupport {
     public void testLinkFisrtOne(){
         IObjectDao dao = new ObjectDao();
         Map<String,Object> condition = new HashMap();
-        List<PmsUserQuery> list = (List<PmsUserQuery>)dao.queryList("testQueryPmsUser",condition);
+        List<PmsUserQuery> list = dao.queryList("testQueryPmsUser",condition);
         for(PmsUserQuery pmsUserQuery : list){
             System.out.println("{userName:\""+pmsUserQuery.getUserName()+"\"}");
             System.out.println("    {roleId:"+pmsUserQuery.getRole().getRoleId()+",roleName:\""+pmsUserQuery.getRole().getRoleName()+"\"}");

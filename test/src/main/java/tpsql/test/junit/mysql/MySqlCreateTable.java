@@ -2,7 +2,7 @@ package tpsql.test.junit.mysql;
 
 import tpsql.sql.meta.Column;
 import tpsql.sql.meta.Table;
-import tpsql.util.StringUtil;
+import tpsql.core.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;

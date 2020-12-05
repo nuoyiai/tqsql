@@ -2,7 +2,7 @@ package tpsql.test.junit.mysql;
 
 import org.junit.Test;
 import tpsql.dao.IObjectDao;
-import tpsql.dao.ObjectDao;
+import tpsql.dao.support.ObjectDao;
 import tpsql.test.domain.PmsRole;
 import tpsql.test.query.PmsUserQuery;
 
@@ -16,7 +16,7 @@ public class MySqlCacheTest extends MySqlSupport {
     public void testCacheReturnDataTable(){
         IObjectDao dao = new ObjectDao();
         Map<String,Object> condition = new HashMap();
-        List<PmsUserQuery> list = (List<PmsUserQuery>)dao.queryList("testQueryPmsUserByCache",condition);
+        List<PmsUserQuery> list = dao.queryList("testQueryPmsUserByCache",condition);
         for(PmsUserQuery pmsUserQuery : list){
             System.out.println("{userName:\""+pmsUserQuery.getUserName()+"\",roleIds:\""+pmsUserQuery.getRoleIds()+"\",roldNames:\""+pmsUserQuery.getRoleNames()+"\"}");
             for(PmsRole role : pmsUserQuery.getRoleList()){

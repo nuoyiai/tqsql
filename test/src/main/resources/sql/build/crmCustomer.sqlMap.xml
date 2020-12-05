@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tpsql>
+
+	<class id="CrmCustomer" name="tpsql.test.domain.CrmCustomer" ></class>
+
+	<!-- 新增客户 -->
+	<sql id="insertCrmCustomer" >
+		INSERT INTO CRM_CUSTOMER (CUST_ID,CUSTOMER_NAME,CONTACTER_NAME,CONTACTER_PHONE,WEIXIN,QQ,CUSTOMER_ADDRESS,WANGWANG,CUSTOMER_AREA,BIRTHDAY) VALUES ([#custId]
+		<clause prepend="," nvl="''" >[#customerName]</clause>
+		<clause prepend="," nvl="''" >[#contacterName]</clause>
+		<clause prepend="," nvl="''" >[#contacterPhone]</clause>
+		<clause prepend="," nvl="''" >[#weixin]</clause>
+		<clause prepend="," nvl="''" >[#qq]</clause>
+		<clause prepend="," nvl="''" >[#customerAddress]</clause>
+		<clause prepend="," nvl="''" >[#wangwang]</clause>
+		<clause prepend="," nvl="''" >[#customerArea]</clause>
+		<clause prepend="," nvl="NULL" >[#birthday]</clause>
+		)
+	</sql>
+
+	<!-- 修改客户 -->
+	<sql id="updateCrmCustomer" >
+		UPDATE CRM_CUSTOMER 
+		<set>
+			<clause prepend="," assert="!isNull([customerName])" >CUSTOMER_NAME = [#customerName]</clause>
+			<clause prepend="," assert="!isNull([contacterName])" >CONTACTER_NAME = [#contacterName]</clause>
+			<clause prepend="," assert="!isNull([contacterPhone])" >CONTACTER_PHONE = [#contacterPhone]</clause>
+			<clause prepend="," assert="!isNull([weixin])" >WEIXIN = [#weixin]</clause>
+			<clause prepend="," assert="!isNull([qq])" >QQ = [#qq]</clause>
+			<clause prepend="," assert="!isNull([customerAddress])" >CUSTOMER_ADDRESS = [#customerAddress]</clause>
+			<clause prepend="," assert="!isNull([wangwang])" >WANGWANG = [#wangwang]</clause>
+			<clause prepend="," assert="!isNull([customerArea])" >CUSTOMER_AREA = [#customerArea]</clause>
+			<clause prepend="," assert="!isNull([birthday])" >BIRTHDAY = [#birthday]</clause>
+		</set>
+		<where>
+			 CUST_ID = [#custId] 
+		</where>
+	</sql>
+
+	<!-- 通过主键得到客户 -->
+	<sql id="getCrmCustomerById" result="CrmCustomer" >
+		SELECT * FROM CRM_CUSTOMER WHERE CUST_ID = [0]
+	</sql>
+
+	<!-- 通过主键删除客户 -->
+	<sql id="deleteCrmCustomerById" >
+		DELETE FROM CRM_CUSTOMER WHERE CUST_ID = [0]
+	</sql>
+
+	<!-- 删除所有客户 -->
+	<sql id="deleteAllCrmCustomer" >
+		DELETE FROM CRM_CUSTOMER
+	</sql>
+
+	<!-- 查询客户 -->
+	<sql id="queryCrmCustomerList" result="CrmCustomer" >
+		SELECT * FROM CRM_CUSTOMER 
+		<where>
+			<clause prepend="and" assert="!isNullOrEmpty([customerName])" > CUSTOMER_NAME = '[customerName]' </clause>
+			<clause prepend="and" assert="!isNullOrEmpty([contacterName])" > CONTACTER_NAME = '[contacterName]' </clause>
+			<clause prepend="and" assert="!isNullOrEmpty([contacterPhone])" > CONTACTER_PHONE = '[contacterPhone]' </clause>
+			<clause prepend="and" assert="!isNullOrEmpty([weixin])" > WEIXIN = '[weixin]' </clause>
+			<clause prepend="and" assert="!isNullOrEmpty([qq])" > QQ = '[qq]' </clause>
+			<clause prepend="and" assert="!isNullOrEmpty([customerAddress])" > CUSTOMER_ADDRESS = '[customerAddress]' </clause>
+			<clause prepend="and" assert="!isNullOrEmpty([wangwang])" > WANGWANG = '[wangwang]' </clause>
+			<clause prepend="and" assert="!isNullOrEmpty([customerArea])" > CUSTOMER_AREA = '[customerArea]' </clause>
+			<clause parent="DateSpan" params="BIRTHDAY,birthday,birthdayEnd" ></clause>
+		</where>
+	</sql>
+
+	<sql id="batchInsertCustomer" >
+		INSERT INTO CRM_CUSTOMER (CUST_ID,CUSTOMER_NAME,CONTACTER_NAME,CONTACTER_PHONE,WEIXIN,QQ,CUSTOMER_ADDRESS,WANGWANG,CUSTOMER_AREA,BIRTHDAY) VALUES
+		<for in="[0]" split="," vars="item" >
+			(
+			<clause >{#item.custId}</clause>
+			<clause prepend="," nvl="''" >{#item.customerName}</clause>
+			<clause prepend="," nvl="''" >{#item.contacterName}</clause>
+			<clause prepend="," nvl="''" >{#item.contacterPhone}</clause>
+			<clause prepend="," nvl="''" >{#item.weixin}</clause>
+			<clause prepend="," nvl="''" >{#item.qq}</clause>
+			<clause prepend="," nvl="''" >{#item.customerAddress}</clause>
+			<clause prepend="," nvl="''" >{#item.wangwang}</clause>
+			<clause prepend="," nvl="''" >{#item.customerArea}</clause>
+			<clause prepend="," nvl="NULL" >{#item.birthday}</clause>
+			)
+		</for>
+	</sql>
+
+</tpsql>
